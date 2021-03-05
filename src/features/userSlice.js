@@ -13,7 +13,7 @@ export const userSlice = createSlice({
       // immutable state based off those changes
       state.user = action.payload;
     },
-    logout: state => {
+    logout: (state) => {
       state.user = null;
     },
   },

@@ -11,6 +11,9 @@ const firebaseConfig = {
   measurementId: "G-NXS186521R"
 };
 
-// const firebaseApp = firebase.initializeApp(firebaseConfig)
-// const db = firebase.firestore()
-// const auth = firebase
+const firebaseApp = firebase.initializeApp(firebaseConfig)
+const db = firebaseApp.firestore()
+export const auth = firebase.auth()
+export const provider = new firebase.auth.GoogleAuthProvider()
+
+export default db

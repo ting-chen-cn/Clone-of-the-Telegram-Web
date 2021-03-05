@@ -1,6 +1,7 @@
 import React from 'react'
 import './SideBar.css'
 import SideBarThreads from './SideBarThreads'
+import db,{auth} from '../firebase'
 import SearchIcon from '@material-ui/icons/Search'
 import IconButton from '@material-ui/core/IconButton'
 import Avatar from '@material-ui/core/Avatar'
@@ -28,7 +29,7 @@ function SideBar() {
         <SideBarThreads />
       </div>
       <div className="sideBar_bottom">
-        <Avatar className="sideBar_bottom_avatar"/>
+        <Avatar className="sideBar_bottom_avatar" onClick={ ()=>auth.signOut()}/>
         <IconButton>
           <PhoneOutlined />
         </IconButton>
