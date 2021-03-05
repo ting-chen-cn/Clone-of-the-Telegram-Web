@@ -1,0 +1,36 @@
+.thread{
+  display: flex;
+  flex:0.65;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.thread_header{
+  display: flex;
+  border-color: 1px solid rgba(190, 190, 190, .1);
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.thread_header_content{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  color: white;
+  padding: 10px;
+}
+
+.thread_header_content_info > h5{
+  font-weight: 500;
+  color: gray;
+}
+
+.thread_header_detail{
+  color: white;
+}
+
+thread_header_detail:hover{
+  color: rgb(1,150,190);
+}

@@ -1,0 +1,7 @@
+step1: git rid off all test file
+step2: delete the serviceWorker in index.js file
+       insert globe css setting in the index.css file by add margin:0
+step3: delete the content of <div></div> in app.js file and replace it with <h1>Telegram clone react</h1>
+step4: delete the counter folder but keep all files of it directly in features folder.
+step5: create component folder and inside it create telegram.js file and it's css file and import it to App.js file
+step6: create the SideBar.js and its css file them import SideBar to telegram.js file
