@@ -1,0 +1,51 @@
+.message {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  position: relative;
+  width: fit-content;
+  margin: 15px;
+}
+
+.message_content {
+  background-color:  rgb(2, 150, 199);
+  padding: 10px;
+  border-radius: 33px;
+  margin: 10px;
+  margin-right: auto;
+}
+/* .message_sender > .message_content {
+  background-color: rgb(2, 150, 199);
+} */
+
+.message > div > p {
+  color: white;
+}
+
+.message > div > small {
+  color: gray;
+  position: absolute;
+  font-size: x-small;
+  right: 0;
+  bottom: -5px;
+}
+
+.message_sender > div > small {
+  color: gray;
+  position: absolute;
+  font-size: x-small;
+  left: 20px;
+  bottom: -5px;
+}
+
+.message_sender {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+
+
+.message_sender > .message_photo {
+  order: 1;
+  margin: 15px;
+}

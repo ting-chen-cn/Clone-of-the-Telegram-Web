@@ -19,6 +19,8 @@
 
 .sideBarThread_timestamp{
   position: absolute;
-  top:5px;
+  bottom: -15px;
   right: 0;
+  color: lightgray;
+  font-size: x-small;
 }

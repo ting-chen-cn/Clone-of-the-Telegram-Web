@@ -10,7 +10,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login_telegram">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt = "telgram logo"/>
         <h1>Telegram</h1>
       </div>
       <Button onClick={signIn}>Sign in</Button>
