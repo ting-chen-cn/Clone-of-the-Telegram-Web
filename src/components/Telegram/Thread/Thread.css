@@ -1,12 +1,14 @@
 .thread{
   display: flex;
-  flex:0.65;
+  flex:0.75;
   flex-direction: column;
   height: 100vh;
 }
 
 .thread_header{
+  height: 50px;
   display: flex;
+  background-color: #3e6e86;
   border-color: 1px solid rgba(190, 190, 190, .1);
   align-items: center;
   align-content: center;
@@ -55,7 +57,6 @@ thread_header_detail:hover{
   flex: 1;
   flex-direction: row;
 }
-
 .thread_input > form > input{
   width: 98%;
   outline-width: 0 ;
@@ -63,15 +64,15 @@ thread_header_detail:hover{
   border-radius: 0;
   background-color: transparent;
   padding:5px;
-  color:white;
+  color:gray;
 }
 
 
 .thread_input > form > button {
-  color: white;
+  color: gray;
 }
 
 .thread_input > form > button:hover {
-  color: rgb(2,150,199);
+  color: darkgray;
 }
 

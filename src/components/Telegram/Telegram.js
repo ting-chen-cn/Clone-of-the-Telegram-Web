@@ -1,5 +1,5 @@
 import React from 'react'
-import './telegram.css'
+import './Telegram.css'
 import SideBar from './SideBar'
 import Thread from './Thread'
 const Telegram = () => {

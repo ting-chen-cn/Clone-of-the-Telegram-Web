@@ -3,11 +3,12 @@ import firebase from 'firebase'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import MoreHoriz from '@material-ui/icons/MoreHoriz'
-import { MicNoneOutlined, SendRounded, TimerOutlined } from '@material-ui/icons'
+import MoodIcon from '@material-ui/icons/Mood';
+import { MicNoneOutlined, SendRounded } from '@material-ui/icons'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../features/userSlice'
-import {selectThreadId,selectThreadName} from '../features/threadSlice'
-import db from '../firebase'
+import { selectUser } from '../../../features/userSlice'
+import {selectThreadId,selectThreadName} from '../../../features/threadSlice'
+import db from '../../../firebase'
 import Message from './Message'
 import './Thread.css'
 
@@ -49,7 +50,7 @@ const Thread = () => {
       setInput('')
     })
     
-}
+  }
   return (
     <div className="thread" >
       <div className="thread_header" >
@@ -57,12 +58,9 @@ const Thread = () => {
           {threadId ? (<Avatar 
                         src = {user.photo}
                     />) : (<Avatar />)}
-          {/* <Avatar src={ messages[0]?.data?.photo}/> */}
           <div className="thread_header_content_info" >
-            <h4>{ threadId ? threadName : "Click on any chat Name"}</h4>
-            {/* <h4>{threadName}</h4> */}
-            {/* <h5>Last seen</h5> */}
-             {/* <h5>{ threadId ? (timeago.format(messages[0]?.timestamp?.toDate())) : "last seen"}</h5> */}
+            <h4>{threadId ? threadName : "Click on any chat Name"}</h4>
+            <h5>last seen { new Date ((messages[messages.length-1]?.data?.timestamp?.toDate())).toLocaleString()}</h5> 
           </div>
         </div>
         <IconButton>
@@ -77,15 +75,15 @@ const Thread = () => {
       </div>
       <div className="thread_input">
         <form>
+          <IconButton>
+            <MoodIcon />
+          </IconButton>
           <input
             placeholder="write your message here"
             type="text"
             value={input}
             onChange={(e)=>setInput(e.target.value)}
           ></input>
-          <IconButton>
-            <TimerOutlined/>
-          </IconButton>
           <IconButton onClick={sendMessage} type='submit'>
             <SendRounded/>
           </IconButton>

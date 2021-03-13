@@ -3,13 +3,15 @@
   align-items: center;
   padding:20px;
   border-bottom: 1px solid rgba(190, 190, 190, .1) ;
-  color: white;
+  color: black;
   cursor: pointer;
 }
 
+
 .sideBarThreads:hover{
-  background-color: rgb(2,150,199);
+  background-color:lightgray;
 }
+
 
 .sideBarThread_details{
   margin-left: 15px;
@@ -21,6 +23,6 @@
   position: absolute;
   bottom: -15px;
   right: 0;
-  color: lightgray;
+  color: gray;
   font-size: x-small;
 }

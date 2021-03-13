@@ -5,3 +5,11 @@ step3: delete the content of <div></div> in app.js file and replace it with <h1>
 step4: delete the counter folder but keep all files of it directly in features folder.
 step5: create component folder and inside it create telegram.js file and it's css file and import it to App.js file
 step6: create the SideBar.js and its css file them import SideBar to telegram.js file
+
+Create React Redux App -- for creating the Template of the Project.
+Firebase -- For Realtime Database and Deployment of the Project.
+material-ui -- For Some PreBuilt Components and Icons.
+redux-toolkit - Redux is generally used for state management.
+node-sass - node-sass natively compiles .scss files to css files
+react-flip-move - This animates the messages.
+moment - moment is js library for manipulating, and formatting dates.

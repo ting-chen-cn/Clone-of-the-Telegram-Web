@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
-import db from '../firebase'
-import {setThread} from '../features/threadSlice'
+import db from '../../../../firebase'
+import {setThread} from '../../../../features/threadSlice'
 import './SideBarThreads.css'
 
 
@@ -22,7 +22,8 @@ const SideBarThreads = ({ id, threadName }) => {
       <Avatar src={ threadInfo[0]?.photo}/>
       <div className="sideBarThread_details">
         <h3> {threadName}</h3>
-        <p>{threadInfo[0]?.message}</p>
+        <div> </div>
+        <div>{threadInfo[0]?.message}</div>
         <small className="sideBarThread_timestamp">
           {new Date(threadInfo[0]?.timestamp?.toDate()).toLocaleString()}
         </small>
