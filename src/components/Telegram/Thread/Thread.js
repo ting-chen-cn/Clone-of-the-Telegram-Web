@@ -7,8 +7,8 @@ import MoodIcon from '@material-ui/icons/Mood';
 import { MicNoneOutlined, SendRounded } from '@material-ui/icons'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../../features/userSlice'
-import {selectThreadId,selectThreadName} from '../../../features/threadSlice'
-import db from '../../../firebase'
+import {selectThread} from '../../../features/threadSlice'
+import db,{auth} from '../../../firebase'
 import Message from './Message'
 import './Thread.css'
 
@@ -16,50 +16,75 @@ import './Thread.css'
 
 const Thread = () => {
   const [input, setInput] = useState('')
-  const [messages, setMessages] = useState([])
-  const user = useSelector(selectUser)
-  const threadId = useSelector(selectThreadId)
-  const threadName = useSelector(selectThreadName)
+  const [messagesRe, setMessagesRe] = useState([])
+  const [messagesSe, setMessagesSe] = useState([])
+  const [user, setUser]= useState('')
+  const currentUser = useSelector(selectUser)
+  const thread = useSelector(selectThread)
+  
+  
 
   useEffect(() => {
-    if (threadId) {
+    if (thread) {
       db
-        .collection('threads')
-        .doc(threadId)
+        .collection('users')
+        .doc(thread.uid)
         .collection('messages')
-        .orderBy("timestamp", "desc")
+        .orderBy("timestamp", "asc")
         .onSnapshot((snapshot) =>
-          setMessages(snapshot.docs.map((doc) => ({
+          setMessagesSe(snapshot.docs.map((doc) => ({
             id: doc.id,
             data:doc.data(),
           })))
         )
     }
-  }, [threadId])
-
+    auth.onAuthStateChanged((authUser) => {
+          setUser({
+            uid: authUser?.uid,
+            photoURL: authUser?.photoURL,
+            email: authUser?.email,
+            displayName:authUser?.displayName,
+          })
+    })
+    if(currentUser){
+      db
+        .collection('users')
+        .doc(currentUser?.uid)
+        .collection('messages')
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot) =>
+          setMessagesRe(snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data:doc.data(),
+          })))
+        )}
+  }, [thread, currentUser])
+  const filterRe = messagesRe.filter((m) => m?.data?.uid === thread?.uid)
+  const filterSe = messagesSe.filter((m)=> m?.data?.uid=== currentUser?.uid)
+  const messages = filterRe.concat(filterSe)
+  
   const sendMessage = (event) => {
     event.preventDefault()
-    db.collection('threads').doc(threadId).collection('messages').add({
+    db.collection('users').doc(thread.uid).collection('messages').add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       message: input,
       uid: user.uid,
-      photo: user.photo ? user.photo: null,
+      photoURL: user.photoURL,
       email: user.email,
       displayName:user.displayName,
     }).then(() => {
       setInput('')
     })
-    
   }
   return (
     <div className="thread" >
       <div className="thread_header" >
         <div className="thread_header_content" >
-          {threadId ? (<Avatar 
-                        src = {user.photo}
+          {thread ? (<Avatar 
+                        src = {thread.photoURL}
                     />) : (<Avatar />)}
           <div className="thread_header_content_info" >
-            <h4>{threadId ? threadName : "Click on any chat Name"}</h4>
+            <h4>{thread ? thread.displayName : "Click on any chat Name"}</h4>
             <h5>last seen { new Date ((messages[messages.length-1]?.data?.timestamp?.toDate())).toLocaleString()}</h5> 
           </div>
         </div>
@@ -68,7 +93,7 @@ const Thread = () => {
         </IconButton>
       </div>
       <div className="thread_message">
-        {messages.map(({ id, data }) => (
+        {messages?.map(({ id, data }) => (
           <Message key={id} data={data}/>
           )
         )}

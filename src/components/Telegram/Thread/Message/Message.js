@@ -11,18 +11,21 @@ const Message = forwardRef(({
             displayName,
             email,
             message,
-            photo,
+            photoURL,
             uid
     }
 }, ref) => {
   const user = useSelector(selectUser)
   return (
-    <div ref = {ref} className={`message ${user.email === email && `message_sender`}`}>
-      <Avatar src={photo} className="message_photo" />
+    <div ref={ref} className={`message ${user.email === email && `message_sender`}`}>
+      <div>
+        <Avatar src={photoURL} className="message_photo" />
+        <div>{displayName}</div>
+      </div>
       <div className="message_content">
+        
         <p className="message_content">{message}</p>
         <small className = "message_timestamp">{new Date(timestamp?.toDate()).toLocaleString()}</small>
-        {/* <small>{timestamp.format(new Date(timestamp?.toDate()))}</small> */}
       </div>
     </div>
   )

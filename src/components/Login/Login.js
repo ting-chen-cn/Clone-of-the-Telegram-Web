@@ -8,7 +8,7 @@ import './Login.css'
 const Login = () => {
 
   const showSignInform = () =>{
-        var element = document.getElementById("signIn");
+        const element = document.getElementById("signIn");
         element.classList.toggle("signIn");
     }
   const showSignUpform = () =>{

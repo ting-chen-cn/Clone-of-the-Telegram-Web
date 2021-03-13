@@ -14,7 +14,10 @@ function App() {
       if (authUser) {
         dispatch(
           login({
-          uid: authUser?.uid
+            uid: authUser?.uid,
+            photoURL: authUser?.photoURL,
+            email: authUser?.email,
+            displayName:authUser?.displayName,
           })
         )} else {
         dispatch(logout())
