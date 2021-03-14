@@ -10,4 +10,4 @@ or to use sign up function to register a new account by input the unique usernam
 ## user profile
 You can open your profile page by click the top-left button.
 And in the profile page you can click the avatar to change another one:
-![change avatar](instruction-img/changeAvatar.gif)
+![change avatar](http://g.recordit.co/7uXf0IMTYc.gif)
