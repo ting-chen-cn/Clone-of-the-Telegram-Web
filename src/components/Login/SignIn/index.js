@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { auth } from '../../../firebase'
 
 const SignIn = () => {
-  const [email, setEmail] = useState('hello@163.com')
-  const [password, setPassword] = useState('password')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const handleSignIn = () => {
     auth.signInWithEmailAndPassword(email, password)
       .then((res) => {
         console.log('login successfully')
-        // console.log(res.user)
       })
         .catch((error) => {
           alert(error.message)

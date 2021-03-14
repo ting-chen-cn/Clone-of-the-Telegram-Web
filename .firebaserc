@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "telegram-clone-react"
+  },
+  "targets": {
+    "telegram-clone-react": {
+      "hosting": {
+        "telegram": [
+          "telegram-clone-react"
+        ]
+      }
+    }
   }
 }
