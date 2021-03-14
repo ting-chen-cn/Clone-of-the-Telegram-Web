@@ -11,3 +11,9 @@ or to use sign up function to register a new account by input the unique usernam
 You can open your profile page by click the top-left button.
 And in the profile page you can click the avatar to change another one:
 ![change avatar](http://g.recordit.co/7uXf0IMTYc.gif)
+Also you can change the username or email by click the specific area.
+By click the Sign Out button to sign out.
+
+## chat
+You can click one of the users list in the sideBar area to start chat with this user:
+[start chat](http://g.recordit.co/kNFKqIEEXa.gif)
