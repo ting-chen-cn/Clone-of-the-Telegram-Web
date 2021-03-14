@@ -16,4 +16,4 @@ By click the Sign Out button to sign out.
 
 ## chat
 You can click one of the users list in the sideBar area to start chat with this user:
-[start chat](http://g.recordit.co/kNFKqIEEXa.gif)
+![start chat](http://g.recordit.co/kNFKqIEEXa.gif)
