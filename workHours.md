@@ -1,5 +1,5 @@
 | day         | time           | job describe  |
-| ------------- |:-------------:| -----:|
+| ------------- |:-------------:| :-----|
 | 27.2      |  3  |create repository for the project and choose what to build  |
 | 5.3      | 6      |   build the interface of the application |
 | 6.3 | 5     |    implement login and logout function |

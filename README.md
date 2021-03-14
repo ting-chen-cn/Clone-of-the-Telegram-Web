@@ -7,5 +7,7 @@ Click [here](https://telegram-clone-react.web.app/)
 
 
 ## Use Instructions
+Click [here](./instruction.md)
 
 ## Working Hours
+Click [here](./workHours.md)
