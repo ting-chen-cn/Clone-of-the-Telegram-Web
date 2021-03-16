@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
+import firebase from 'firebase'
 import db,{ auth } from '../../../firebase'
 
 const SignUp = () => {
@@ -20,27 +21,34 @@ const SignUp = () => {
   const handleSignUp = async() => {
     await checkUsername(username)
     if(! usernameRepeated)
-    {if (password === passwordRe) {
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((res) => {
-          if (res.user) {
-            db.collection('users').doc(res.user.uid).set({
-              uid: res.user?.uid,
-              photoURL: res.user?.photoURL,
-              email: res.user?.email,
-              displayName: username,
-              phoneNumber: res.user?.phoneNumber,
+    {
+      if (password === passwordRe) {
+        auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+          auth.createUserWithEmailAndPassword(email, password)
+            .then((res) => {
+              if (res.user) {
+                db.collection('users').doc(res.user.uid).set({
+                  uid: res.user?.uid,
+                  photoURL: res.user?.photoURL,
+                  email: res.user?.email,
+                  displayName: username,
+                  phoneNumber: res.user?.phoneNumber,
+                })
+                const user = auth.currentUser
+                user.updateProfile({
+                  displayName: username
+                })
+              }
             })
-            const user = auth.currentUser
-            user.updateProfile({
-                displayName: username
+            .catch((error) => {
+              alert(error.message)
             })
-          }
+        })
+          .catch((error) => {
+            alert(error.message)
           })
-        .catch((error) => {
-          alert(error.message)
-            })
-      } else {
+      }
+      else {
         alert('passwords would be the same, please input again')
     }
     } else {

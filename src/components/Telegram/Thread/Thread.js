@@ -62,6 +62,9 @@ const Thread = () => {
   const filterRe = messagesRe.filter((m) => m?.data?.uid === thread?.uid)
   const filterSe = messagesSe.filter((m)=> m?.data?.uid=== currentUser?.uid)
   const messages = filterRe.concat(filterSe)
+  messages.sort(function(a,b){return a.data?.timestamp - b.data?.timestamp})
+  // console.log(messages[1]?.data?.timestamp)
+  // console.log(messages[0]?.data?.timestamp<messages[1]?.data?.timestamp)
   
   const sendMessage = (event) => {
     event.preventDefault()

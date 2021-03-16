@@ -12,5 +12,6 @@
 | 13.3 | 5      |    update the chat function |
 | 14.3 | 4      |    deploy application to firebase |
 | 14.3 | 2      |    write the readme.md and use instruction |
-| total | 55      |          |
+| 16.3 | 3      |    update the user's persistence type to session which allows multiple users login in the same time  |
+| total | 58     |          |
 

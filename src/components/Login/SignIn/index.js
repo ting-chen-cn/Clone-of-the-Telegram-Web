@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import firebase from 'firebase'
 import { auth } from '../../../firebase'
 
 const SignIn = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('hello@163.com')
+  const [password, setPassword] = useState('password')
   const handleSignIn = () => {
+    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() =>{
     auth.signInWithEmailAndPassword(email, password)
       .then((res) => {
         console.log('login successfully')
@@ -13,7 +15,11 @@ const SignIn = () => {
           alert(error.message)
         })
     setEmail('')
-    setPassword('')
+      setPassword('')
+    })
+    .catch((error) => {
+      alert(error.message)
+      })
   }
   return (
     <div>
