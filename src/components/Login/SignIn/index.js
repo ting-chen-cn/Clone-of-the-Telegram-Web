@@ -5,21 +5,12 @@ import { auth } from '../../../firebase'
 const SignIn = () => {
   const [email, setEmail] = useState('hello@163.com')
   const [password, setPassword] = useState('password')
-  const handleSignIn = () => {
-    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() =>{
-    auth.signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        console.log('login successfully')
-      })
-        .catch((error) => {
-          alert(error.message)
-        })
+  const handleSignIn = async() => {
+    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    const res= await auth.signInWithEmailAndPassword(email, password)
+    if(!res.user) return alert('user sign in fails, please try again.')
     setEmail('')
-      setPassword('')
-    })
-    .catch((error) => {
-      alert(error.message)
-      })
+    setPassword('')
   }
   return (
     <div>

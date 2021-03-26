@@ -20,40 +20,20 @@ const SignUp = () => {
 
   const handleSignUp = async() => {
     await checkUsername(username)
-    if(! usernameRepeated)
-    {
-      if (password === passwordRe) {
-        auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
-          auth.createUserWithEmailAndPassword(email, password)
-            .then((res) => {
-              if (res.user) {
-                db.collection('users').doc(res.user.uid).set({
-                  uid: res.user?.uid,
-                  photoURL: res.user?.photoURL,
-                  email: res.user?.email,
-                  displayName: username,
-                  phoneNumber: res.user?.phoneNumber,
-                })
-                const user = auth.currentUser
-                user.updateProfile({
-                  displayName: username
-                })
-              }
-            })
-            .catch((error) => {
-              alert(error.message)
-            })
-        })
-          .catch((error) => {
-            alert(error.message)
-          })
-      }
-      else {
-        alert('passwords would be the same, please input again')
-    }
-    } else {
-      alert('user name repeated, please use another one.')
-      }
+    if( usernameRepeated) return  alert('user name repeated, please use another one.')
+    if (password !== passwordRe) return alert('passwords would be the same, please input again')
+    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    const res= await auth.createUserWithEmailAndPassword(email, password)
+    if(!res.user) return alert('user sign up fails, please try again.')
+    db.collection('users').doc(res.user.uid).set({
+      uid: res.user?.uid,
+      photoURL: res.user?.photoURL,
+      email: res.user?.email,
+      displayName: username,
+      phoneNumber: res.user?.phoneNumber,
+    })
+    const user = auth.currentUser
+    user.updateProfile({displayName: username})
   }
 
   return (

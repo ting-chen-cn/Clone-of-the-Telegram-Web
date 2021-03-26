@@ -54,10 +54,9 @@ const SideBarThreads = ({ id, data,user }) => {
       <Avatar src={ data?.photoURL}/>
       <div className="sideBarThread_details">
         <p> {data.displayName}</p>
-        <div>{messages[0]?.data?.message}</div>
+        <div>{messages[messages.length-1]?.data?.message}</div>
         <small className="sideBarThread_timestamp">
-          {/* { messages[0] ? toDate(messages[0]?.data?.timestamp) :null } */}
-          { messages[0] ? new Date(messages[0]?.data?.timestamp?.toDate()).toLocaleString() : null}
+          { messages[messages.length-1] ? new Date(messages[0]?.data?.timestamp?.toDate()).toLocaleString() : null}
         </small>
       </div>
       
