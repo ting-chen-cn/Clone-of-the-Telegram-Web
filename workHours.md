@@ -13,5 +13,6 @@
 | 14.3 | 4      |    deploy application to firebase |
 | 14.3 | 2      |    write the readme.md and use instruction |
 | 16.3 | 3      |    update the user's persistence type to session which allows multiple users login in the same time  |
-| total | 58     |          |
+| 26.3 | 3      |    fix some issues raised by Jakousa |
+| total | 61     |          |
 
