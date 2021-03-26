@@ -7,13 +7,15 @@ import './Login.css'
 
 const Login = () => {
 
-  const showSignInform = () =>{
-        const element = document.getElementById("signIn");
-        element.classList.toggle("signIn");
-    }
-  const showSignUpform = () =>{
-        const element = document.getElementById("signUp");
-        element.classList.toggle("signUp");
+  const showSignInform = () => {
+    // eslint-disable-next-line no-undef
+    const element = document.getElementById('signIn')
+    element.classList.toggle('signIn')
+  }
+  const showSignUpform = () => {
+    // eslint-disable-next-line no-undef
+    const element = document.getElementById('signUp')
+    element.classList.toggle('signUp')
   }
 
   return (

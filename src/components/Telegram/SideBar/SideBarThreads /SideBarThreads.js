@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react'
-import {useDispatch} from 'react-redux'
+import React,{ useState,useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
 import db from '../../../../firebase'
 import { setThread } from '../../../../features/threadSlice'
@@ -8,11 +8,11 @@ import './SideBarThreads.css'
 
 const SideBarThreads = ({ id, data,user }) => {
   const dispatch = useDispatch()
-  
+
 
   const [messagesRe, setMessagesRe] = useState([])
   const [messagesSe, setMessagesSe] = useState([])
-  
+
 
   useEffect(() => {
     if (id) {
@@ -20,7 +20,7 @@ const SideBarThreads = ({ id, data,user }) => {
         .collection('users')
         .doc(id)
         .collection('messages')
-        .orderBy("timestamp", "asc")
+        .orderBy('timestamp', 'asc')
         .onSnapshot((snapshot) =>
           setMessagesSe(snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -33,7 +33,7 @@ const SideBarThreads = ({ id, data,user }) => {
         .collection('users')
         .doc(user?.uid)
         .collection('messages')
-        .orderBy("timestamp", "asc")
+        .orderBy('timestamp', 'asc')
         .onSnapshot((snapshot) =>
           setMessagesRe(snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -41,15 +41,15 @@ const SideBarThreads = ({ id, data,user }) => {
           })))
         )}
   }, [id, user])
-  
+
   const filterRe = messagesRe.filter((m) => m?.data?.uid === id)
-  const filterSe = messagesSe.filter((m)=> m?.data?.uid=== user?.uid)
+  const filterSe = messagesSe.filter((m) => m?.data?.uid=== user?.uid)
   const messages = filterRe.concat(filterSe)
   messages.sort(function (a, b) { return a.data?.timestamp - b.data?.timestamp })
 
   return (
     <div
-      onClick={()=>dispatch(setThread({data}))}
+      onClick={() => dispatch(setThread({ data }))}
       className="sideBarThreads">
       <Avatar src={ data?.photoURL}/>
       <div className="sideBarThread_details">
@@ -59,7 +59,7 @@ const SideBarThreads = ({ id, data,user }) => {
           { messages[messages.length-1] ? new Date(messages[0]?.data?.timestamp?.toDate()).toLocaleString() : null}
         </small>
       </div>
-      
+
     </div>
   )
 }

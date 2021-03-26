@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import {useSelector,useDispatch} from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import Telegram from './components/Telegram'
 import Login from './components/Login'
-import {selectUser,login,logout} from './features/userSlice'
+import { selectUser,login,logout } from './features/userSlice'
 import { auth } from './firebase'
 import './App.css'
 
@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       {user ? <Telegram /> : <Login />}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

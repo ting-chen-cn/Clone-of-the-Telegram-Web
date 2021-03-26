@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export const threadSlice = createSlice({
   name: 'thread',
@@ -7,12 +7,12 @@ export const threadSlice = createSlice({
   },
   reducers: {
     setThread: (state,action) => {
-      state.thread = action.payload.data;
+      state.thread = action.payload.data
     },
   },
-});
+})
 
-export const { setThread } = threadSlice.actions;
-export const selectThread =state => state.thread.thread;
+export const { setThread } = threadSlice.actions
+export const selectThread =state => state.thread.thread
 
-export default threadSlice.reducer;
+export default threadSlice.reducer

@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import BorderColorOutlinedIcon  from '@material-ui/icons/BorderColorOutlined'
 import { useSelector } from 'react-redux'
-import {selectUser} from '../../../features/userSlice'
+import { selectUser } from '../../../features/userSlice'
 import SideBarThreads from './SideBarThreads '
 import db from '../../../firebase'
 import Profile from './Profile'
@@ -15,7 +15,7 @@ function SideBar() {
   const user = useSelector(selectUser)
   const [threads, setThreads] = useState([])
   const [showProfile, setShowProfile] = useState(false)
-  
+
   useEffect(() => {
     db.collection('users').onSnapshot((snapshot) =>
       setThreads(snapshot.docs.map((doc) => {
@@ -30,8 +30,9 @@ function SideBar() {
   const show = () => {
     setShowProfile(!showProfile)
   }
-  const showThreads =threads.filter((t)=>t.id!==user.uid) 
+  const showThreads =threads.filter((t) => t.id!==user.uid)
   const addThread = () => {
+    // eslint-disable-next-line no-undef
     const threadName = prompt('Enter a thread name.')
     if (threadName) {
       db.collection('threads').add({
@@ -60,19 +61,19 @@ function SideBar() {
               <SearchIcon className="searchIcon"/>
               <input placeholder="Search" className="search_input"></input>
               <IconButton variant="outlined" id="sideBar_button" onClick={addThread}>
-              <BorderColorOutlinedIcon  />
-            </IconButton>
+                <BorderColorOutlinedIcon  />
+              </IconButton>
             </div>
             <div className="sideBar_threads">
               {showThreads
                 .map(({ id, data }) => (
                   <SideBarThreads key={id} id={id} data={data} user={user}/>
                 )
-              )}
+                )}
             </div>
           </div>
         }
-        </div>
+      </div>
     </div>
   )
 }

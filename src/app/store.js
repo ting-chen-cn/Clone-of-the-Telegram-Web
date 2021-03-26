@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '../features/userSlice';
+import { configureStore } from '@reduxjs/toolkit'
+import userReducer from '../features/userSlice'
 import threadReducer from '../features/threadSlice'
 
 export default configureStore({
@@ -7,4 +7,4 @@ export default configureStore({
     user: userReducer,
     thread:threadReducer
   },
-});
+})
