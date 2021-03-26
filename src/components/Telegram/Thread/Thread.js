@@ -8,7 +8,7 @@ import { MicNoneOutlined, SendRounded } from '@material-ui/icons'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../../features/userSlice'
 import {selectThread} from '../../../features/threadSlice'
-import db,{auth} from '../../../firebase'
+import db from '../../../firebase'
 import Message from './Message'
 import './Thread.css'
 
@@ -18,7 +18,6 @@ const Thread = () => {
   const [input, setInput] = useState('')
   const [messagesRe, setMessagesRe] = useState([])
   const [messagesSe, setMessagesSe] = useState([])
-  const [user, setUser]= useState('')
   const currentUser = useSelector(selectUser)
   const thread = useSelector(selectThread)
   
@@ -38,14 +37,6 @@ const Thread = () => {
           })))
         )
     }
-    auth.onAuthStateChanged((authUser) => {
-          setUser({
-            uid: authUser?.uid,
-            photoURL: authUser?.photoURL,
-            email: authUser?.email,
-            displayName:authUser?.displayName,
-          })
-    })
     if(currentUser){
       db
         .collection('users')
@@ -63,22 +54,30 @@ const Thread = () => {
   const filterSe = messagesSe.filter((m)=> m?.data?.uid=== currentUser?.uid)
   const messages = filterRe.concat(filterSe)
   messages.sort(function(a,b){return a.data?.timestamp - b.data?.timestamp})
-  // console.log(messages[1]?.data?.timestamp)
-  // console.log(messages[0]?.data?.timestamp<messages[1]?.data?.timestamp)
   
   const sendMessage = (event) => {
     event.preventDefault()
-    db.collection('users').doc(thread.uid).collection('messages').add({
+    db.collection('users').doc(thread?.uid).collection('messages').add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       message: input,
-      uid: user.uid,
-      photoURL: user.photoURL,
-      email: user.email,
-      displayName:user.displayName,
+      uid: currentUser.uid,
+      sender: currentUser.uid,
+      photoURL: currentUser?.photoURL,
+      email: currentUser?.email,
+      displayName:currentUser?.displayName,
     }).then(() => {
       setInput('')
     })
   }
+  const autoScrollDown = () => {
+    if (messages) {
+    const objDiv = document.getElementById("thread_message")
+      if (objDiv) {
+        objDiv.scrollTop = objDiv.scrollHeight
+      }
+    }
+  }
+  autoScrollDown()
   return (
     <div className="thread" >
       <div className="thread_header" >
@@ -95,14 +94,14 @@ const Thread = () => {
           <MoreHoriz className="thread_header_detail"/>
         </IconButton>
       </div>
-      <div className="thread_message">
+      <div id="thread_message"className="thread_message">
         {messages?.map(({ id, data }) => (
           <Message key={id} data={data}/>
           )
         )}
       </div>
       <div className="thread_input">
-        <form>
+        <form >
           <IconButton>
             <MoodIcon />
           </IconButton>

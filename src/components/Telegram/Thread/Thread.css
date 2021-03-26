@@ -66,6 +66,7 @@ thread_header_detail:hover{
   background-color: transparent;
   padding:5px;
   color:gray;
+  word-wrap: break-word;
 }
 
 

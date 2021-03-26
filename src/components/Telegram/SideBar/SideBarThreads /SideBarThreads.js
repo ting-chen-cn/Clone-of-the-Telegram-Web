@@ -1,33 +1,64 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
-// import db from '../../../../firebase'
-import {setThread} from '../../../../features/threadSlice'
+import db from '../../../../firebase'
+import { setThread } from '../../../../features/threadSlice'
 import './SideBarThreads.css'
 
 
-const SideBarThreads = ({ id, data }) => {
+const SideBarThreads = ({ id, data,user }) => {
   const dispatch = useDispatch()
-  // const [threadInfo, setThreadInfo] = useState([])
-  // useEffect(() => {
-  //   db.collection('users').doc(id).collection('messages').orderBy("timestamp", "desc")
-  //       .onSnapshot((snapshot) => setThreadInfo(snapshot.docs.map((doc) => 
-  //         doc.data(),
-  //     )))
-  // }, [id])
-  // console.log(data)
+  
+
+  const [messagesRe, setMessagesRe] = useState([])
+  const [messagesSe, setMessagesSe] = useState([])
+  
+
+  useEffect(() => {
+    if (id) {
+      db
+        .collection('users')
+        .doc(id)
+        .collection('messages')
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot) =>
+          setMessagesSe(snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data:doc.data(),
+          })))
+        )
+    }
+    if(user){
+      db
+        .collection('users')
+        .doc(user?.uid)
+        .collection('messages')
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot) =>
+          setMessagesRe(snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data:doc.data(),
+          })))
+        )}
+  }, [id, user])
+  
+  const filterRe = messagesRe.filter((m) => m?.data?.uid === id)
+  const filterSe = messagesSe.filter((m)=> m?.data?.uid=== user?.uid)
+  const messages = filterRe.concat(filterSe)
+  messages.sort(function (a, b) { return a.data?.timestamp - b.data?.timestamp })
+
   return (
     <div
       onClick={()=>dispatch(setThread({data}))}
       className="sideBarThreads">
       <Avatar src={ data?.photoURL}/>
       <div className="sideBarThread_details">
-        <h3> {data.displayName}</h3>
-        {/* <div>sidebar </div> */}
-        {/* <div>{threadInfo[0]?.message}</div> */}
-        {/* <small className="sideBarThread_timestamp">
-          {new Date(threadInfo[0]?.timestamp?.toDate()).toLocaleString()}
-        </small> */}
+        <p> {data.displayName}</p>
+        <div>{messages[0]?.data?.message}</div>
+        <small className="sideBarThread_timestamp">
+          {/* { messages[0] ? toDate(messages[0]?.data?.timestamp) :null } */}
+          { messages[0] ? new Date(messages[0]?.data?.timestamp?.toDate()).toLocaleString() : null}
+        </small>
       </div>
       
     </div>

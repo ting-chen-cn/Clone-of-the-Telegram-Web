@@ -1,51 +1,37 @@
 .message {
   display: flex;
   padding: 15px;
-  align-items: center;
-  position: relative;
+  flex-direction: row;
+  margin: 15px;
+}
+.photo-container{
+  display: flex;
+  flex:0.1
+}
+.content_container{
+  display: flex;
+  flex:0.5;
+  flex-direction: column;
+  
+  padding-bottom: 15px;
+  justify-content: space-between;
+  width: 50%;
+  word-wrap: break-word;
+}
+.content_user{
+  color:steelblue;
+  height: 30px;
+}
+.message_content{
+  color: black;
+  padding: 20px;
   width: fit-content;
-  margin: 15px;
+  background-color: rgba(3, 70, 70, 0.1);
+  border: 1px solid rgba(3, 70, 70, 0.2);
+  border-radius: 20px;
 }
-
-.message_content {
-  background-color:  rgb(2, 150, 199);
-  padding: 10px;
-  border-radius: 33px;
-  margin: 10px;
-  margin-right: auto;
-}
-/* .message_sender > .message_content {
-  background-color: rgb(2, 150, 199);
-} */
-
-.message > div > p {
-  color: white;
-}
-
-.message > div > small {
-  color: gray;
-  position: absolute;
-  font-size: x-small;
-  right: 0;
-  bottom: -5px;
-}
-
-.message_sender > div > small {
-  color: gray;
-  position: absolute;
-  font-size: x-small;
-  left: 20px;
-  bottom: -5px;
-}
-
-.message_sender {
-  margin-left: auto;
-  margin-right: 10px;
-}
-
-
-
-.message_sender > .message_photo {
-  order: 1;
-  margin: 15px;
+.time-container{
+  display: flex;
+  font-size: small;
+  flex:0.3
 }

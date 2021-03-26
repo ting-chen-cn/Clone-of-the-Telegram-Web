@@ -66,7 +66,7 @@ function SideBar() {
             <div className="sideBar_threads">
               {showThreads
                 .map(({ id, data }) => (
-                  <SideBarThreads key={id} id={id} data={data}/>
+                  <SideBarThreads key={id} id={id} data={data} user={user}/>
                 )
               )}
             </div>
